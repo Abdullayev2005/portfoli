@@ -34,8 +34,8 @@ export default function Home() {
 
     const onMove = (e) =>
       setCursor((c) => ({ ...c, x: e.clientX, y: e.clientY, active: true }));
-    const onLeave = () =>
-      setCursor((c) => ({ ...c, active: false, big: false }));
+    const onLeave = () => setCursor((c) => ({ ...c, active: false, big: false }));
+
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseleave", onLeave);
     return () => {
@@ -54,6 +54,7 @@ export default function Home() {
       const max = h.scrollHeight - h.clientHeight;
       setProgress(max <= 0 ? 0 : h.scrollTop / max);
     };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -91,6 +92,7 @@ export default function Home() {
       const rx = (0.5 - py) * 10;
       setTilt({ rx: clamp(rx, -10, 10), ry: clamp(ry, -10, 10) });
     };
+
     const onLeave = () => setTilt({ rx: 0, ry: 0 });
 
     el.addEventListener("mousemove", onMove);
@@ -110,6 +112,12 @@ export default function Home() {
     onMouseEnter: () => setCursor((c) => ({ ...c, big: true })),
     onMouseLeave: () => setCursor((c) => ({ ...c, big: false })),
   };
+
+  const heroCardClass = [
+    "relative w-[300px] sm:w-[320px] aspect-[9/16] rounded-[40px]",
+    "border border-white/20 bg-white/[0.03] overflow-hidden p-3 md:p-4",
+    "shadow-[0_35px_140px_rgba(0,0,0,0.70)]",
+  ].join(" ");
 
   return (
     <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
@@ -140,9 +148,8 @@ export default function Home() {
         <div className="h-px bg-white" style={{ width: `${Math.round(progress * 1000) / 10}%` }} />
       </div>
 
-      {/* LUX BACKGROUND (no color change) */}
+      {/* LUX BACKGROUND */}
       <div aria-hidden className="pointer-events-none fixed inset-0 z-[0]">
-        {/* mouse spotlight */}
         <div
           className="absolute inset-0"
           style={{
@@ -150,17 +157,9 @@ export default function Home() {
             transition: reduceMotion ? "none" : "background 120ms ease",
           }}
         />
-
-        {/* deep vignette */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_55%,transparent_32%,rgba(0,0,0,0.92)_100%)]" />
-
-        {/* luxury grid */}
         <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(to_right,rgba(255,255,255,0.55)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.35)_1px,transparent_1px)] bg-[size:160px_160px]" />
-
-        {/* diagonal sheen */}
         <div className="absolute -top-40 left-[-45%] h-[520px] w-[190%] rotate-6 bg-gradient-to-b from-white/10 via-white/5 to-transparent blur-3xl opacity-60" />
-
-        {/* orbs */}
         <div className="absolute left-[10%] top-[18%] h-[240px] w-[240px] rounded-full bg-white/[0.05] blur-3xl" />
         <div className="absolute right-[10%] top-[45%] h-[280px] w-[280px] rounded-full bg-white/[0.045] blur-3xl" />
         <div className="absolute left-[42%] bottom-[8%] h-[320px] w-[320px] rounded-full bg-white/[0.04] blur-3xl" />
@@ -257,9 +256,9 @@ export default function Home() {
             </h1>
 
             <p className="mt-6 max-w-xl text-sm md:text-base text-white/70 leading-relaxed">
-              I build business-driven digital products for real estate, startups, education, and service
-              businesses. Using Next.js, Node.js, Tailwind CSS, Telegram bots, and immersive 360° tour
-              technologies, I create systems that deliver real-world results.
+              I build business-driven digital products for real estate, startups, education, and service businesses.
+              Using Next.js, Node.js, Tailwind CSS, Telegram bots, and immersive 360° tour technologies, I create
+              systems that deliver real-world results.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
@@ -302,9 +301,7 @@ export default function Home() {
             <div
               ref={heroRef}
               {...hoverableProps}
-              className="relative w-[300px] sm:w-[320px] aspect-[9/16] rounded-[40px]
-                         border border-white/20 bg-white/[0.03] overflow-hidden p-3 md:p-4
-                         shadow-[0_35px_140px_rgba(0,0,0,0.70)]"
+              className={heroCardClass}
               style={{
                 transform: reduceMotion
                   ? "none"
@@ -324,9 +321,7 @@ export default function Home() {
 
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,transparent_35%,rgba(0,0,0,0.78)_100%)]" />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/55" />
-
                 <div className="absolute -top-20 left-[-30%] h-72 w-[160%] rotate-6 bg-gradient-to-b from-white/12 to-transparent blur-2xl opacity-65" />
-
                 <div className="absolute inset-0 rounded-[34px] border border-white/15" />
               </div>
             </div>
@@ -390,7 +385,7 @@ export default function Home() {
                 </div>
                 <div className="mt-6 h-px bg-white/10" />
                 <p className="mt-3 text-[11px] text-white/55">
-                      Hover → micro details • Click → case study (we’ll add it next)
+                  Hover → micro details • Click → case study (we’ll add it next)
                 </p>
               </article>
             ))}
@@ -411,12 +406,11 @@ export default function Home() {
                 I treat code as a product, not just technology.
               </h3>
               <p className="mt-4 text-sm md:text-base text-white/70 leading-relaxed">
-                Every project starts with understanding the user, the problem, and the desired
-                business outcome. Design and UX come first — code follows.
+                Every project starts with understanding the user, the problem, and the desired business outcome.
+                Design and UX come first — code follows.
               </p>
               <p className="mt-4 text-sm md:text-base text-white/70 leading-relaxed">
-                Bandu, BM Group 360, BushidoWords, and automation bots are real systems used in
-                production.
+                Bandu, BM Group 360, BushidoWords, and automation bots are real systems used in production.
               </p>
             </div>
 
@@ -435,9 +429,7 @@ export default function Home() {
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/40 p-4">
                 <p className="text-[10px] tracking-[0.45em] uppercase text-white/45">Availability</p>
-                <p className="mt-2 text-sm text-white/75">
-                  Freelance, product build, partnerships.
-                </p>
+                <p className="mt-2 text-sm text-white/75">Freelance, product build, partnerships.</p>
               </div>
             </div>
           </div>
@@ -454,8 +446,7 @@ export default function Home() {
                   <span className="block">together.</span>
                 </h3>
                 <p className="mt-4 text-sm md:text-base text-white/70">
-                  Share a short description of your project. I’ll propose the optimal solution,
-                  architecture, and UX approach.
+                  Share a short description of your project. I’ll propose the optimal solution, architecture, and UX approach.
                 </p>
               </div>
 
