@@ -32,10 +32,8 @@ export default function Home() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const onMove = (e) =>
-      setCursor((c) => ({ ...c, x: e.clientX, y: e.clientY, active: true }));
+    const onMove = (e) => setCursor((c) => ({ ...c, x: e.clientX, y: e.clientY, active: true }));
     const onLeave = () => setCursor((c) => ({ ...c, active: false, big: false }));
-
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseleave", onLeave);
     return () => {
@@ -54,7 +52,6 @@ export default function Home() {
       const max = h.scrollHeight - h.clientHeight;
       setProgress(max <= 0 ? 0 : h.scrollTop / max);
     };
-
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -92,7 +89,6 @@ export default function Home() {
       const rx = (0.5 - py) * 10;
       setTilt({ rx: clamp(rx, -10, 10), ry: clamp(ry, -10, 10) });
     };
-
     const onLeave = () => setTilt({ rx: 0, ry: 0 });
 
     el.addEventListener("mousemove", onMove);
@@ -113,11 +109,8 @@ export default function Home() {
     onMouseLeave: () => setCursor((c) => ({ ...c, big: false })),
   };
 
-  const heroCardClass = [
-    "relative w-[300px] sm:w-[320px] aspect-[9/16] rounded-[40px]",
-    "border border-white/20 bg-white/[0.03] overflow-hidden p-3 md:p-4",
-    "shadow-[0_35px_140px_rgba(0,0,0,0.70)]",
-  ].join(" ");
+  const heroCardClass =
+    "relative w-[300px] sm:w-[320px] aspect-[9/16] rounded-[40px] border border-white/20 bg-white/[0.03] overflow-hidden p-3 md:p-4 shadow-[0_35px_140px_rgba(0,0,0,0.70)]";
 
   return (
     <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
@@ -148,7 +141,7 @@ export default function Home() {
         <div className="h-px bg-white" style={{ width: `${Math.round(progress * 1000) / 10}%` }} />
       </div>
 
-      {/* LUX BACKGROUND */}
+      {/* background */}
       <div aria-hidden className="pointer-events-none fixed inset-0 z-[0]">
         <div
           className="absolute inset-0"
@@ -237,9 +230,7 @@ export default function Home() {
               </p>
             </div>
 
-            <p className="text-[11px] tracking-[0.35em] uppercase text-white/55">
-              FULL STACK DEVELOPER • FOUNDER
-            </p>
+            <p className="text-[11px] tracking-[0.35em] uppercase text-white/55">FULL STACK DEVELOPER • FOUNDER</p>
 
             <h1 className="mt-4 text-[40px] sm:text-[50px] lg:text-[64px] font-semibold leading-[0.9] tracking-tight">
               I build{" "}
@@ -303,9 +294,7 @@ export default function Home() {
               {...hoverableProps}
               className={heroCardClass}
               style={{
-                transform: reduceMotion
-                  ? "none"
-                  : `perspective(900px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`,
+                transform: reduceMotion ? "none" : `perspective(900px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`,
                 transition: "transform 120ms ease",
               }}
             >
@@ -423,9 +412,7 @@ export default function Home() {
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/40 p-4">
                 <p className="text-[10px] tracking-[0.45em] uppercase text-white/45">Principles</p>
-                <p className="mt-2 text-sm text-white/75">
-                  Minimal UI. Strong typography. Real-world UX. Performance.
-                </p>
+                <p className="mt-2 text-sm text-white/75">Minimal UI. Strong typography. Real-world UX. Performance.</p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/40 p-4">
                 <p className="text-[10px] tracking-[0.45em] uppercase text-white/45">Availability</p>
@@ -446,14 +433,13 @@ export default function Home() {
                   <span className="block">together.</span>
                 </h3>
                 <p className="mt-4 text-sm md:text-base text-white/70">
-                  Share a short description of your project. I’ll propose the optimal solution, architecture, and UX approach.
+                  Share a short description of your project. I’ll propose the optimal solution, architecture, and UX
+                  approach.
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-3 text-xs md:text-sm">
-                <span className="rounded-full border border-white/15 bg-black/30 px-4 py-2">
-                  Telegram: @hasanovich_o
-                </span>
+                <span className="rounded-full border border-white/15 bg-black/30 px-4 py-2">Telegram: @hasanovich_o</span>
                 <span className="rounded-full border border-white/15 bg-black/30 px-4 py-2">
                   Email: parzivalt15.09.2005@gmail.com
                 </span>
@@ -472,8 +458,12 @@ export default function Home() {
 
       <style jsx global>{`
         @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
         }
       `}</style>
     </main>
